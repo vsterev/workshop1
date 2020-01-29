@@ -1,3 +1,4 @@
+import { ICause } from './shared/interfaces/cause';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  selectedCause: ICause;
+  selectCauseHandler(cause: ICause) {
+    this.selectedCause = cause;
+    console.log(`App.component SelectedCauseName ${this.selectedCause.cause}`);
+  }
 }
