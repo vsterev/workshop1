@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { ServiceService } from './../service.service';
 import { ICause } from './../shared/interfaces/cause';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
@@ -8,18 +8,19 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./left.component.css']
 })
 export class LeftComponent implements OnInit {
-  causes: ICause[];
-  @Output() selectCause: EventEmitter <ICause> = new EventEmitter();
-  // selectCause: EventEmitter<ICause> = new EventEmitter();
-  // @Output() selectedCause3: ICause;
 
-  constructor(public http: HttpClient) { }
+  get causes() {
+    return this.serviceService.causes;
+
+  }
+  constructor(private serviceService: ServiceService) {
+  }
+
   ngOnInit() {
-    this.http.get<ICause[]>('http://localhost:3000/causes').subscribe(res => { this.causes = res; });
+    this.serviceService.loadCauses();
+
   }
   selectCauseHandler(cause: ICause) {
-    this.selectCause.emit(cause);
-    // this.causesService.selectedCause = cause;
-    // console.log(this.selectCause);
+    this.serviceService.selectedCause = cause;
   }
 }

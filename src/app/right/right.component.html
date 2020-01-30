@@ -1,26 +1,26 @@
 <div class="col-md-8">
-  <div *ngIf="selectedCause2" >
+  <div *ngIf="selectedCause" >
       <div class="row">
           <div class="col-xs-12">
-              <h1 class="text-center">{{selectedCause2.cause}}</h1>
+              <h1 class="text-center">{{selectedCause.cause}}</h1>
           </div>
       </div>
       <div class="row">
           <div class="col-xs-12">
-          <img [src]="selectedCause2.imageUrl" alt="" class="img-responsive img-details">
+          <img [src]="selectedCause.imageUrl" alt="" class="img-responsive img-details">
           </div>
       </div>
       <hr>
       <div class="row">
           <div class="col-xs-12 cause-description">
-              {{selectedCause2.description}}
+              {{selectedCause.description}}
           </div>
       <div class="row">
           <div class="col-xs-12">
               <p class="text-bold amount">
-                  <span>{{selectedCause2.collectedAmount}}</span>
+                  <span [class]="color">{{selectedCause.collectedAmount}}</span>
                   from
-                  <span>$</span>{{selectedCause2.neededAmount}}
+                  <span>$</span>{{selectedCause.neededAmount}}
               </p>
           </div>
       </div>
@@ -31,16 +31,16 @@
                       <label class="sr-only" for="donatedAmount"></label>
                       <div class="input-group">
                           <div class="input-group-addon">$</div>
-                          <input type="text" class="form-control" id="donatedAmount"
+                          <input #amountInput type="number" class="form-control" id="donatedAmount"
                               placeholder="Amount">
                           <div class="input-group-addon">.00</div>
                       </div>
                   </div>
-                  <button type="submit" class="btn btn-success">Make donation</button>
+                  <button type="button" class="btn btn-success" (click)="makeDonatationHandler()">Make donation</button>
               </form>
           </div>
       </div>
       <hr>
   </div>
-  <span *ngIf="!selectedCause2">Please choise Cause!!!</span>
 </div>
+<div *ngIf="!selectedCause" >Please choise Cause!!!</div>
